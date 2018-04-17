@@ -1,0 +1,135 @@
+﻿@using DeleBil.Models;
+@model DeleBil.Models.LeaseDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detaljer for utlån av bil</h2>
+<hr />
+
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <h4>Detaljer for bil</h4>
+        <div class="details">
+            <div class="form-group">
+                <label>
+                    @Html.DisplayNameFor(model => model.CarOwner):
+                </label>
+                @Html.DisplayFor(model => model.CarOwner)
+            </div>
+            <div class="form-group">
+                <label>
+                    @Html.DisplayNameFor(model => model.CarLicensePlate):
+                </label>
+                @Html.DisplayFor(model => model.CarLicensePlate)
+            </div>
+            <div class="form-group">
+                <label>
+                    @Html.DisplayNameFor(model => model.CarName):
+                </label>
+                @Html.DisplayFor(model => model.CarName)
+            </div>
+            <div class="form-group">
+                <label>
+                    @Html.DisplayNameFor(model => model.Status):
+                </label>
+                @Html.DisplayFor(model => model.Status)
+            </div>
+            @if (Model.Status != LeaseStatus.Available)
+            {
+                <div class="form-group">
+                    <label>
+                        @Html.DisplayNameFor(model => model.LeaserUserName):
+                    </label>
+                    @Html.DisplayFor(model => model.LeaserUserName)
+                </div>
+            }
+        </div>
+        <h4>Siste kjente lokasjon:</h4>
+        <div class="details">
+            <div id="map" style="height:400px; width:100%;"></div>
+        </div>
+    </div>
+
+    <div class="container-fluid col-xs-12 col-md-6">
+        <div id="imgcarousel" class="carousel" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="data:image/jpeg;base64, @Convert.ToBase64String(Model.CarPicture.PictureData)" class="img-responsive" />
+                </div>
+
+                @foreach (Picture picture in Model.PicUpLocationPictures)
+                {
+                    <div class="item">
+                        <img src="data:image/jpeg;base64, @Convert.ToBase64String(picture.PictureData)" class="img-responsive" />
+                    </div>
+                }
+
+                @if (Model.Status == LeaseStatus.Delivered)
+                {
+                    foreach (Picture picture in Model.DeliveryLocationPictures)
+                    {
+                        <div class="item">
+                            <img src="data:image/jpeg;base64, @Convert.ToBase64String(picture.PictureData)" class="img-responsive" />
+                        </div>
+                    }
+                }
+
+            </div>
+            <a class="left carousel-control" href="#imgcarousel" data-slide="prev">
+                <span class="icon-prev"></span>
+            </a>
+            <a class="right carousel-control" href="#imgcarousel" data-slide="next">
+                <span class="icon-next"></span>
+            </a>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @if (Model.CarOwner == User.Identity.Name && Model.Status == LeaseStatus.Available)
+        {
+            <hr />
+            @Html.ActionLink("Sett utilgjengelig for utlån", "DeleteLease", "Home", new { id = Model.Id }, new { @class = "btn btn-default col-xs-12", onclick = "return confirm('Er du sikker på at du vil sette bilen utilgjengelig for utlån?');" })
+        }
+        @if (Model.CarOwner == User.Identity.Name && Model.Status == LeaseStatus.Delivered)
+        {
+            <hr />
+            @Html.ActionLink("Godkjenn innlevering", "ChangeStatus", new { id = Model.Id }, new { @class = "btn btn-default col-xs-12" })
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv_OTPW8qrXwkrIsEJtjj0kHPOFRV3Tkc&callback=initMap">
+    </script>
+    <script>
+        function initMap() {
+            var status = @Html.Raw(Json.Encode(Model.Status.ToString()));
+            var latitudePickUpLocation = @Html.Raw(Json.Encode(Model.latitudePickUpLocation));
+            var longtitudePickUpLocation = @Html.Raw(Json.Encode(Model.longtitudePickUpLocation));
+            var latitudeDeliveryLocation = @Html.Raw(Json.Encode(Model.latitudeDeliveryLocation));
+            var longtitudeDeliveryLocation = @Html.Raw(Json.Encode(Model.longtitudeDeliveryLocation));
+
+            if (status == 'Available' || status == 'Rented') {
+                var location = { lat: latitudePickUpLocation, lng: longtitudePickUpLocation};
+            }
+            if (status == 'Delivered' || status == 'Verified') {
+                var location = { lat: latitudeDeliveryLocation, lng: longtitudeDeliveryLocation };
+            }
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 20,
+                center: location
+            });
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+    </script>
+}

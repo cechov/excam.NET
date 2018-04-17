@@ -1,0 +1,207 @@
+﻿@model dynamic
+@using DeleBil.Models;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Administrer biler, lån og utlån</h2>
+<hr />
+<p class="pull-right">
+
+</p>
+<h4>Mine biler</h4>
+<table class="table table-hover">
+    <thead style="background-color:lightblue;">
+        <tr>
+            <th>
+                Skiltnummer
+            </th>
+            <th>
+                Tittel
+            </th>
+            <th class="text-right col-xs-4">
+                <a href="@Url.Action("NewCar", "Cars")">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.CountCars > 0)
+        {
+            foreach (Car car in Model.UserCars)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(car.LicensePlate, "Details", "Cars", new { id = car.Id }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => car.Title)
+                    </td>
+                    <td></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">
+                    Det er ikke registrert noen biler.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+<h4>Mine biler som er registrert til utlån</h4>
+<table class="table table-hover">
+    <thead style="background-color:lightblue;">
+        <tr>
+            <th>
+                Skiltnummer
+            </th>
+            <th>
+                Tittel
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.CountCarsForLease > 0)
+        {
+            foreach (Lease lease in Model.UserCarsForLease)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.Car.LicensePlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.Car.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detaljer", "Details", "Leases", new { id = lease.Id }, null)
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">
+                    Det er ikke registrert noen biler for utlån.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+<h4>Min utlån-historikk</h4>
+
+<table class="table table-hover">
+    <thead style="background-color:lightblue;">
+        <tr>
+            <th>
+                Skiltnummer
+            </th>
+            <th>
+                Tittel
+            </th>
+            <th>
+                Utlånt til
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.CountCarLeases > 0)
+        {
+            foreach (LeaseDto lease in Model.UserCarLeases)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.CarLicensePlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.CarName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.LeaserUserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.Status)
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">
+                    Det er ikke registrert noen utlån.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+<h4>Min lånehistorikk</h4>
+
+<table class="table table-hover">
+    <thead style="background-color:lightblue;">
+        <tr>
+            <th>
+                Skiltnummer
+            </th>
+            <th>
+                Tittel
+            </th>
+            <th>
+                Eier
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.CountRentals > 0)
+        {
+            foreach (LeaseDto lease in Model.UserRentals)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.CarLicensePlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.CarName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.CarOwner)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => lease.Status)
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">
+                    Det er ikke registrert noen lån.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

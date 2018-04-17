@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:minWidth="25px"
+    android:minHeight="25px">
+      <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/setAvailable_Map"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:name="com.google.android.gms.maps.MapFragment" />
+    </LinearLayout>
+  <ImageButton
+        android:src="@drawable/location"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-40dp"
+        android:layout_marginRight="10dp"
+        android:background="@null"
+        android:id="@+id/setAvailable_getPos"
+        android:layout_gravity="right" />
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="Tilstand: "
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="left" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       android:orientation="horizontal"
+       android:layout_width="match_parent"
+       android:layout_height="150dp"
+       android:background="#F2F2F2"
+       android:minWidth="25px"
+       android:minHeight="25px"
+        android:gravity="center">
+      <ImageView
+        android:src="@drawable/picture"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/setAvailable_Picture"
+        android:layout_gravity="center" />
+      <ImageView
+        android:src="@drawable/picture"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:id="@+id/setAvailable_Picture2"
+        android:layout_gravity="center" />
+      <ImageView
+        android:src="@drawable/picture"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/setAvailable_Picture3"
+        android:layout_gravity="center" />
+      <ImageButton
+        android:src="@drawable/add_picture"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@null"
+        android:id="@+id/setAvailable_uploadPicture"
+        android:layout_gravity="center" />
+    </LinearLayout>
+      <Button
+          android:text="LÅN UT"
+          android:layout_width="250dp"
+          android:layout_height="wrap_content"
+          android:id="@+id/setAvailable_Confirm"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginTop="30dp" />
+  </LinearLayout>
+</LinearLayout>

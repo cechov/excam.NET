@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/setRented_Map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.gms.maps.MapFragment" />
+  </LinearLayout>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/setRented_CarName" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:minWidth="25px"
+       android:minHeight="25px">
+      <ImageView
+         android:layout_width="250dp"
+         android:layout_height="wrap_content"
+         android:id="@+id/setRented_Image"
+         android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+    <Button
+        android:text="LÅN BIL"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/setRented_Confirm" 
+        android:layout_gravity="center_horizontal" />
+  </LinearLayout>
+</LinearLayout>

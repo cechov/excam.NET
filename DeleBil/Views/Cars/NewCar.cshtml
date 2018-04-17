@@ -1,0 +1,59 @@
+﻿@model DeleBil.Models.Car
+
+@{
+    ViewBag.Title = "NewCar";
+}
+
+@using (Html.BeginForm("NewCar", "Home", null, FormMethod.Post, new { role = "form", enctype = "multipart/form-data", id = "newCarForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-xs-12">
+        <h2>Registrer ny bil</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.LicensePlate)
+            @Html.EditorFor(model => model.LicensePlate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LicensePlate, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Bilde")
+            <input type="file" id="file" name="file" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Registrer" class="btn btn-primary pull-right col-xs-12 col-md-3" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*<script>
+        var newCarForm = $('#newCarForm');
+        newCarForm.on('submit', function (e) {
+            e.preventDefault();
+
+            var form = new FormData(newCarForm[0]);
+            $.post({
+                url: '/api/Cars',
+                data: form,
+                contentType: false,
+                processData: false,
+            }).then(function (response) {
+                console.info(response);
+                window.location.href = '/Cars/Details/' + response;
+            });
+
+            return false;
+        });
+    </script>*@
+}
