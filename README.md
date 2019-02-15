@@ -1,5 +1,5 @@
 # excam.NET
-This is the result of the exam for the .NET developer education at Norges Yrkesakademi, former eCademy. The study resulted in a certification as a Microsoft Certifed Solutions Developer, and included subjects required to create web applications using HTML5/JavaScript, Visual Basic.NET, Sky services (Windows Azure), SQL, C # and ASP.NET MVC, as well as development against mobile platforms using Xamarin.
+This is the result of the exam for the .NET developer education at Norges Yrkesakademi, former eCademy. The study included subjects required to create web applications using HTML5/JavaScript, Visual Basic.NET, Sky services (Windows Azure), SQL, C # and ASP.NET MVC, as well as development against mobile platforms using Xamarin.
 
 <hr/>
 <br/>
